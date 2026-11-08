@@ -1,0 +1,67 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>QuickCamp</RootNamespace>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <DebugType>none</DebugType>
+    <CopyDocumentationFilesFromPackages>false</CopyDocumentationFilesFromPackages>
+    <CopyDebugSymbolFilesFromPackages>false</CopyDebugSymbolFilesFromPackages>
+    <AllowedReferenceRelatedFileExtensions>none</AllowedReferenceRelatedFileExtensions>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <WebView2Version>1.0.2849.39</WebView2Version>
+    <WebView2LoaderPath>$(NuGetPackageRoot)microsoft.web.webview2/$(WebView2Version)/runtimes/win-x64/native/WebView2Loader.dll</WebView2LoaderPath>
+    <WebView2LoaderGz>$(BaseIntermediateOutputPath)WebView2Loader.dll.gz</WebView2LoaderGz>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="logo-large.png" LogicalName="QuickCamp.logo.png" />
+    <EmbeddedResource Include="$(WebView2LoaderGz)" LogicalName="QuickCamp.WebView2Loader.dll.gz" Visible="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="$(WebView2Version)" />
+  </ItemGroup>
+
+  <UsingTask TaskName="GzipFile" TaskFactory="RoslynCodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+    <ParameterGroup>
+      <Source ParameterType="System.String" Required="true" />
+      <Destination ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.IO.Compression" />
+      <Code Type="Fragment" Language="cs"><![CDATA[
+        Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(Destination)));
+        using (var input = File.OpenRead(Source))
+        using (var output = File.Create(Destination))
+        using (var gzip = new GZipStream(output, CompressionLevel.Optimal))
+            input.CopyTo(gzip);
+      ]]></Code>
+    </Task>
+  </UsingTask>
+
+  <Target Name="CompressWebView2Loader" BeforeTargets="PrepareForBuild" Inputs="$(WebView2LoaderPath)" Outputs="$(WebView2LoaderGz)">
+    <GzipFile Source="$(WebView2LoaderPath)" Destination="$(WebView2LoaderGz)" />
+  </Target>
+
+  <Target Name="DropWebView2Wrappers" AfterTargets="ResolveAssemblyReferences">
+    <ItemGroup>
+      <ReferenceCopyLocalPaths Remove="@(ReferenceCopyLocalPaths)" Condition="'%(Filename)' == 'Microsoft.Web.WebView2.Wpf' or '%(Filename)' == 'Microsoft.Web.WebView2.WinForms'" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="DropBundledWebView2Loader" AfterTargets="ComputeResolvedFilesToPublishList">
+    <ItemGroup>
+      <ResolvedFileToPublish Remove="@(ResolvedFileToPublish)" Condition="'%(Filename)%(Extension)' == 'WebView2Loader.dll'" />
+    </ItemGroup>
+  </Target>
+
+</Project>
