@@ -1,4 +1,4 @@
-namespace QuickCamp;
+namespace Quickcamp;
 
 internal static class Program
 {

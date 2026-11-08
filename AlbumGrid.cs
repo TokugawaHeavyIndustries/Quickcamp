@@ -1,6 +1,6 @@
 using System.Windows.Forms.VisualStyles;
 
-namespace QuickCamp;
+namespace Quickcamp;
 
 public sealed class AlbumGrid : Control
 {

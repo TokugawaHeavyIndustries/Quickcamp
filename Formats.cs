@@ -1,4 +1,4 @@
-namespace QuickCamp;
+namespace Quickcamp;
 
 public static class Formats
 {

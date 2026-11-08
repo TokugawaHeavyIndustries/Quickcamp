@@ -4,7 +4,7 @@ using System.Text;
 using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
 
-namespace QuickCamp;
+namespace Quickcamp;
 
 public sealed record Fan(long Id, string Username);
 

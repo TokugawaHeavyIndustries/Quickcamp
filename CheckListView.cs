@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace QuickCamp;
+namespace Quickcamp;
 public sealed class CheckListView : ListView
 {
     public event EventHandler? HeaderCheckBoxClicked;

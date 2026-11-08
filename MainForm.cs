@@ -2,7 +2,7 @@ using System.Diagnostics;
 using System.IO.Compression;
 using System.Text;
 
-namespace QuickCamp;
+namespace Quickcamp;
 
 public sealed class MainForm : Form
 {
@@ -14,7 +14,7 @@ public sealed class MainForm : Form
 
     private readonly BandcampClient _bc = new();
     private static readonly string ExeDir = AppContext.BaseDirectory;
-    private static readonly string IniFile = Path.Combine(ExeDir, "QuickCamp.ini");
+    private static readonly string IniFile = Path.Combine(ExeDir, "Quickcamp.ini");
     private static readonly string DataDir = Path.Combine(ExeDir, "data");
     private string? _savedIdentity;
 
@@ -75,7 +75,7 @@ public sealed class MainForm : Form
 
     public MainForm()
     {
-        Text = "QuickCamp";
+        Text = "Quickcamp";
         Icon = Assets.AppIcon;
         StartPosition = FormStartPosition.Manual;
         SizeToScreen();
@@ -263,7 +263,7 @@ public sealed class MainForm : Form
             }
 
             SetLoggedIn(true);
-            Text = $"QuickCamp - {fan.Username}";
+            Text = $"Quickcamp - {fan.Username}";
 
             SetStatus("Reading collection...");
             _all = await _bc.GetCollectionAsync(fan.Id, n => SetStatus($"Reading collection... {n} items"));
@@ -274,7 +274,7 @@ public sealed class MainForm : Form
         catch (Exception ex)
         {
             SetStatus("Couldn't load collection.");
-            MessageBox.Show(this, ex.Message, "QuickCamp", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(this, ex.Message, "Quickcamp", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         finally
         {
@@ -326,7 +326,7 @@ public sealed class MainForm : Form
         _loggedIn = loggedIn;
         _logout.Enabled = loggedIn;
         _reload.Visible = loggedIn;
-        if (!loggedIn) Text = "QuickCamp";
+        if (!loggedIn) Text = "Quickcamp";
         ApplyView();
     }
     private void ApplyDetailsColumn()
@@ -521,7 +521,7 @@ public sealed class MainForm : Form
             .ToList();
         if (picked.Count == 0)
         {
-            MessageBox.Show(this, "Check some items first.", "QuickCamp");
+            MessageBox.Show(this, "Check some items first.", "Quickcamp");
             return;
         }
 
@@ -534,7 +534,7 @@ public sealed class MainForm : Form
         }
         catch (Exception ex)
         {
-            MessageBox.Show(this, $"Bad output folder: {ex.Message}", "QuickCamp");
+            MessageBox.Show(this, $"Bad output folder: {ex.Message}", "Quickcamp");
             return;
         }
         SaveSettings();

@@ -1,6 +1,6 @@
 using Microsoft.Web.WebView2.Core;
 
-namespace QuickCamp;
+namespace Quickcamp;
 
 public sealed class LoginWindow : Form
 {
@@ -56,7 +56,7 @@ public sealed class LoginWindow : Form
             MessageBox.Show(this,
                 "The login window needs the Microsoft Edge WebView2 Runtime, which isn't installed.\n\n" +
                 "Get it from https://developer.microsoft.com/microsoft-edge/webview2/ and try again.",
-                "QuickCamp", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                "Quickcamp", MessageBoxButtons.OK, MessageBoxIcon.Error);
             DialogResult = DialogResult.Cancel;
             Close();
             return;

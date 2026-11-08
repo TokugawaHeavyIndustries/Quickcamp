@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace QuickCamp;
+namespace Quickcamp;
 
 public sealed class LibraryScan
 {

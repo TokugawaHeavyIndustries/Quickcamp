@@ -6,7 +6,8 @@
     <UseWindowsForms>true</UseWindowsForms>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>QuickCamp</RootNamespace>
+    <RootNamespace>Quickcamp</RootNamespace>
+    <AssemblyName>Quickcamp</AssemblyName>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <SelfContained>false</SelfContained>
     <PublishSingleFile>true</PublishSingleFile>
@@ -22,8 +23,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="logo-large.png" LogicalName="QuickCamp.logo.png" />
-    <EmbeddedResource Include="$(WebView2LoaderGz)" LogicalName="QuickCamp.WebView2Loader.dll.gz" Visible="false" />
+    <EmbeddedResource Include="logo-large.png" LogicalName="Quickcamp.logo.png" />
+    <EmbeddedResource Include="$(WebView2LoaderGz)" LogicalName="Quickcamp.WebView2Loader.dll.gz" Visible="false" />
   </ItemGroup>
 
   <ItemGroup>
