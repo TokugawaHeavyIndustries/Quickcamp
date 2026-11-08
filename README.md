@@ -1,5 +1,4 @@
 # Quickcamp
-=======
 
 ![Quickcamp logo](logo-large.png)
 
